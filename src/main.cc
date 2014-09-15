@@ -8,6 +8,8 @@
 
 #define RUN_GRAPHICS_DISPLAY 0x00;
 
+#include "GameWorld.h"
+
 /*
  * SDL timers run in separate threads.  In the timer thread
  * push an event onto the event queue.  This event signifies
@@ -92,7 +94,8 @@ std::shared_ptr<SDL_Window> InitWorld() {
 int main(int argc, char ** argv) {
   Uint32 delay = 1000/60; // in milliseconds
 
-  std::shared_ptr<SDL_Window> window = InitWorld();
+  auto window = InitWorld();
+  auto game_world = std::make_shared<GameWorld>();
   if(!window) {
     SDL_Quit();
   }
