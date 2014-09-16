@@ -1,6 +1,5 @@
 #define GLEW_STATIC // Easier debugging
 #include <GL/glew.h>
-#define GL3_PROTOTYPES 1 // Ensure OpenGl 3 core only.
 #include <GL/gl.h>
 #include <SDL2/SDL.h>
 #include <iostream>
