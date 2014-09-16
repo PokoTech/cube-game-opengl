@@ -21,7 +21,7 @@ void GameAssetManager::operator=(GameAssetManager const& the_manager) {
 }
 
 GLuint GameAssetManager::CreateGLProgram(std::string & vertex_shader
-                       , std::string & fragment_shader) {
+                                         , std::string & fragment_shader) {
   auto v_shader_token = CreateGLESShader(GL_VERTEX_SHADER, vertex_shader);
   auto f_shader_token = CreateGLESShader(GL_FRAGMENT_SHADER, fragment_shader);
 
@@ -37,7 +37,7 @@ GLuint GameAssetManager::CreateGLProgram(std::string & vertex_shader
   if (!program_ok) {
     std::cerr << "Failed to link shader program:" << std::endl;
     glDeleteProgram(program);
-    return -1;
+    exit(-1);
   }
   return program;
 }
@@ -59,7 +59,7 @@ GLuint GameAssetManager::CreateGLESShader(GLenum type, std::string & shader) {
   if (!shader_ok) {
     std::cerr << "Failed to compile " << shader << " with error code " << shader_ok << std::endl;
     glDeleteShader(shader_token);
-    return 0;
+    exit(-1);
   }
   return shader_token;
 }
