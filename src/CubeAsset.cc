@@ -75,7 +75,7 @@ void CubeAsset::Draw(GLuint program_token) {
   glDrawElements(
                  GL_TRIANGLES,
                  element_buffer_length,
-                 GL_UNSIGNED_SHORT,
+                 GL_UNSIGNED_INT,
                  (GLvoid*) 0
                  );
 
