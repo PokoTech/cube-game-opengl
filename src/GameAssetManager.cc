@@ -6,7 +6,11 @@ GameAssetManager::GameAssetManager(ApplicationMode mode) {
 
   switch(mode) {
   case ROTATE:
+    vertex_shader = "shaders/rotate.vs";
+    break;
   case SCALE:
+    vertex_shader = "shaders/scale.vs";
+    break;
   case TRANSFORM:
   default:
     break;
