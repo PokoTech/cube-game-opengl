@@ -88,6 +88,9 @@ std::shared_ptr<SDL_Window> InitWorld() {
     return nullptr;
   }
 
+  // OpenGL settings
+  glDisable(GL_CULL_FACE);
+
   window.reset(_window, SDL_DestroyWindow);
   return window;
 }
