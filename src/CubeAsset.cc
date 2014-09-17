@@ -35,9 +35,26 @@ CubeAsset::~CubeAsset() {
   delete(element_buffer);
 }
 
+#define checkGLError() checkError(__FILE__, __LINE__)
+
+void checkError(std::string file, int line) {
+  GLenum gl_error = glGetError();
+  if(GL_NO_ERROR != gl_error) {
+    std::cerr << "GL error in " << file << " at line " << line << " error: " << gl_error << std::endl;
+    exit(-1);
+  }
+}
+
 void CubeAsset::Draw(GLuint program_token) {
+  if(!glIsProgram(program_token)) {
+    std::cerr << "Drawing Cube with invalid program" << std::endl;
+    return;
+  }
+
   GLuint position_attrib = glGetAttribLocation(program_token, "position");
   glUseProgram(program_token);
+
+  checkGLError();
 
   // use the previously transferred buffer as the vertex array.  This way
   // we transfer the buffer once -- at construction -- not on every frame.
@@ -52,6 +69,8 @@ void CubeAsset::Draw(GLuint program_token) {
                         );
   glEnableVertexAttribArray(position_attrib);
 
+  checkGLError();
+
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer_token);
   glDrawElements(
                  GL_TRIANGLES,
@@ -59,6 +78,8 @@ void CubeAsset::Draw(GLuint program_token) {
                  GL_UNSIGNED_SHORT,
                  (GLvoid*) 0
                  );
+
+  checkGLError();
 
   glDisableVertexAttribArray(position_attrib);
 }
