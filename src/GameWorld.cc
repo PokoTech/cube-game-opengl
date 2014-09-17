@@ -1,5 +1,6 @@
 #include "GameWorld.h"
 
 GameWorld::GameWorld () {
-  // GameAssetManager::getInstance().addAsset(CubeAsset::create());
+  asset_manager = std::make_shared<GameAssetManager>();
+  asset_manager->AddAsset(std::make_shared<CubeAsset>());
 }

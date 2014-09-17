@@ -6,6 +6,7 @@
 class GameAsset {
  public:
   virtual void Draw(GLuint) = 0;
+
 };
 
 #endif

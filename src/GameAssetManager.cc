@@ -1,23 +1,21 @@
 #include "GameAssetManager.h"
 
-GameAssetManager& GameAssetManager::getInstance() {
-  static GameAssetManager the_manager;
-  return the_manager;
-}
-
-void GameAssetManager::addAsset(std::shared_ptr<GameAsset> the_asset) {
+void GameAssetManager::AddAsset(std::shared_ptr<GameAsset> the_asset) {
 }
 
 GameAssetManager::GameAssetManager() {
 }
 
 GameAssetManager::GameAssetManager(GameAssetManager const& the_manager) {
+  // TODO: implement this
 }
 
 GameAssetManager::GameAssetManager(GameAssetManager const&& the_manager) {
+  // TODO: implement this
 }
 
 void GameAssetManager::operator=(GameAssetManager const& the_manager) {
+  // TODO: implement this
 }
 
 GLuint GameAssetManager::CreateGLProgram(std::string & vertex_shader

@@ -1,11 +1,17 @@
 #ifndef GAMEWORLD_H
 #define GAMEWORLD_H
 
-#define GL3_PROTOTYPES 1 // Ensure OpenGl 3 core only.
+#include <memory>
+
 #include <GL/gl.h>
+
+#include "GameAssetManager.h"
+#include "CubeAsset.h"
 
 class GameWorld {
  public:
   GameWorld();
+ private:
+  std::shared_ptr<GameAssetManager> asset_manager;
 };
 #endif // GAMEWORLD_H

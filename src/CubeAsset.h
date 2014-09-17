@@ -10,6 +10,7 @@ class CubeAsset : public GameAsset {
   CubeAsset();
   ~CubeAsset();
   virtual void Draw(GLuint);
+
  private:
   GLfloat * vertex_buffer;
   GLuint * element_buffer;
