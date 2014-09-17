@@ -2,7 +2,7 @@
 
 CubeAsset::CubeAsset() {
   // model coordinates, origin at centre.
-  vertex_buffer = new GLfloat[12]{
+  GLfloat vertex_buffer [] {
     -0.5, -0.5, -0.5
     , -0.5,  0.5, -0.5
     ,  0.5, -0.5, -0.5
@@ -10,7 +10,7 @@ CubeAsset::CubeAsset() {
   };
 
   element_buffer_length = 6;
-  element_buffer = new GLuint[element_buffer_length]{
+  GLuint element_buffer []  {
     0, 1, 2
     , 1, 3, 2
   };
@@ -27,12 +27,10 @@ CubeAsset::CubeAsset() {
 
   glGenBuffers(1, &element_buffer_token);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer_token);
-  glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6, element_buffer, GL_STATIC_DRAW);
+  glBufferData(GL_ELEMENT_ARRAY_BUFFER, element_buffer_length, element_buffer, GL_STATIC_DRAW);
 }
 
 CubeAsset::~CubeAsset() {
-  delete(vertex_buffer);
-  delete(element_buffer);
 }
 
 #define checkGLError() checkError(__FILE__, __LINE__)
