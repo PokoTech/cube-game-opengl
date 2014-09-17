@@ -1,9 +1,9 @@
 #include "GameAssetManager.h"
 
-void GameAssetManager::AddAsset(std::shared_ptr<GameAsset> the_asset) {
-}
-
 GameAssetManager::GameAssetManager() {
+  std::string vertex_shader("shaders/translate.vs");
+  std::string fragment_shader("shaders/fragment.fs");
+  program_token = CreateGLProgram(vertex_shader, fragment_shader);
 }
 
 GameAssetManager::GameAssetManager(GameAssetManager const& the_manager) {
@@ -16,6 +16,16 @@ GameAssetManager::GameAssetManager(GameAssetManager const&& the_manager) {
 
 void GameAssetManager::operator=(GameAssetManager const& the_manager) {
   // TODO: implement this
+}
+
+void GameAssetManager::AddAsset(std::shared_ptr<GameAsset> the_asset) {
+  draw_list.push_back(the_asset);
+}
+
+void GameAssetManager::Draw() {
+  for(auto ga: draw_list) {
+    ga->Draw(program_token);
+  }
 }
 
 GLuint GameAssetManager::CreateGLProgram(std::string & vertex_shader
@@ -50,13 +60,25 @@ GLuint GameAssetManager::CreateGLESShader(GLenum type, std::string & shader) {
 
   shader_token = glCreateShader(type);
   glShaderSource(shader_token, 1, (const GLchar**)&source.first, &source.second);
-  delete(source.first);
   glCompileShader(shader_token);
+  delete(source.first);
 
   glGetShaderiv(shader_token, GL_COMPILE_STATUS, &shader_ok);
   if (!shader_ok) {
+    GLint maxLength = 0;
+    glGetShaderiv(shader_token, GL_INFO_LOG_LENGTH, &maxLength);
+
+    //The maxLength includes the NULL character
+    std::vector<char> errorLog(maxLength);
+    glGetShaderInfoLog(shader_token, maxLength, &maxLength, &errorLog[0]);
+
+    //Provide the infolog in whatever manor you deem best.
     std::cerr << "Failed to compile " << shader << " with error code " << shader_ok << std::endl;
-    glDeleteShader(shader_token);
+    for(auto c: errorLog) {
+      std::cerr << c;
+    }
+
+    glDeleteShader(shader_token); //Don't leak the shader.
     exit(-1);
   }
   return shader_token;
