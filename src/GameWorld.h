@@ -5,12 +5,13 @@
 
 #include <GL/gl.h>
 
+#include "common.h"
 #include "GameAssetManager.h"
 #include "CubeAsset.h"
 
 class GameWorld {
  public:
-  GameWorld();
+  GameWorld(ApplicationMode);
   void Draw();
  private:
   std::shared_ptr<GameAssetManager> asset_manager;

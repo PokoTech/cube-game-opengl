@@ -5,8 +5,11 @@
 #include <iostream>
 #include <memory>
 
+#include <boost/program_options.hpp>
+
 #define RUN_GRAPHICS_DISPLAY 0x00;
 
+#include "common.h"
 #include "GameWorld.h"
 
 /*
@@ -100,11 +103,44 @@ std::shared_ptr<SDL_Window> InitWorld() {
   return window;
 }
 
+ApplicationMode ParseOptions (int argc, char ** argv) {
+  namespace po = boost::program_options;
+
+  po::options_description desc("Allowed options");
+  desc.add_options()
+     ("help", "print this help message")
+     ("translate", "Show translation example (default)")
+     ("rotate", "Show rotation example")
+     ("scale", "Show scale example")
+  ;
+
+  po::variables_map vm;
+  po::store(po::parse_command_line(argc, argv, desc), vm);
+  po::notify(vm);
+
+  if(vm.count("help")) {
+    std::cout << desc << std::endl;
+    exit(0);
+  }
+
+  if(vm.count("rotate")) {
+    return ROTATE;
+  }
+
+  if(vm.count("scale")) {
+    return SCALE;
+  }
+
+  // The default
+  return TRANSFORM;
+}
+
 int main(int argc, char ** argv) {
   Uint32 delay = 1000/60; // in milliseconds
 
+  auto mode = ParseOptions(argc, argv);
   auto window = InitWorld();
-  auto game_world = std::make_shared<GameWorld>();
+  auto game_world = std::make_shared<GameWorld>(mode);
   if(!window) {
     SDL_Quit();
   }

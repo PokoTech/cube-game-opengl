@@ -10,11 +10,12 @@
 
 #include <GL/gl.h>
 
+#include "common.h"
 #include "GameAsset.h"
 
 class GameAssetManager {
  public:
-  GameAssetManager(); // constructor
+  explicit GameAssetManager(ApplicationMode); // constructor
   GameAssetManager(GameAssetManager const&); // copy constructor
   GameAssetManager(GameAssetManager const&&); // move constructor
   void operator=(GameAssetManager const&); // assignment

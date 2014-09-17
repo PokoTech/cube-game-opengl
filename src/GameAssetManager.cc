@@ -1,8 +1,17 @@
 #include "GameAssetManager.h"
 
-GameAssetManager::GameAssetManager() {
+GameAssetManager::GameAssetManager(ApplicationMode mode) {
   std::string vertex_shader("shaders/translate.vs");
   std::string fragment_shader("shaders/fragment.fs");
+
+  switch(mode) {
+  case ROTATE:
+  case SCALE:
+  case TRANSFORM:
+  default:
+    break;
+  };
+
   program_token = CreateGLProgram(vertex_shader, fragment_shader);
 }
 
