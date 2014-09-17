@@ -67,7 +67,12 @@ std::shared_ptr<SDL_Window> InitWorld() {
   atexit(SDL_Quit);
 
   // Create a new window with an OpenGL surface
-  _window = SDL_CreateWindow("CI224 - Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+  _window = SDL_CreateWindow("Translate Shader Example"
+                             , SDL_WINDOWPOS_CENTERED
+                             , SDL_WINDOWPOS_CENTERED
+                             , width
+                             , height
+                             , SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
   if (!_window) {
     std::cout << "Failed to create SDL window: " << SDL_GetError() << std::endl;
     return nullptr;
