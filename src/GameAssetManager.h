@@ -19,6 +19,7 @@ class GameAssetManager {
   GameAssetManager(GameAssetManager const&&); // move constructor
   void operator=(GameAssetManager const&); // assignment
   void AddAsset(std::shared_ptr<GameAsset>);
+  void Draw();
 
  private:
   GLuint CreateGLProgram(std::string &, std::string &);
@@ -27,7 +28,7 @@ class GameAssetManager {
   std::pair<GLchar *, GLint>  ReadShader(std::string &);
 
   std::vector<std::shared_ptr<GameAsset>> draw_list;
-  GLuint program;
+  GLuint program_token;
 };
 
 #endif // GAMEASSETMANAGER_H

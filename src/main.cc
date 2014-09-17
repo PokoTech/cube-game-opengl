@@ -31,9 +31,11 @@ struct SDLWindowDeleter {
   }
 };
 
-void Draw(const std::shared_ptr<SDL_Window> window) {
+void Draw(const std::shared_ptr<SDL_Window> window, const std::shared_ptr<GameWorld> game_world) {
   glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
   glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+
+  game_world->Draw();
 
   // Don't forget to swap the buffers
   SDL_GL_SwapWindow(window.get());
@@ -110,7 +112,7 @@ int main(int argc, char ** argv) {
       SDL_Quit();
       break;
     case SDL_USEREVENT:
-      Draw(window);
+      Draw(window, game_world);
       break;
     default:
       break;

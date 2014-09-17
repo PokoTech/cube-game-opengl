@@ -11,6 +11,7 @@
 class GameWorld {
  public:
   GameWorld();
+  void Draw();
  private:
   std::shared_ptr<GameAssetManager> asset_manager;
 };
