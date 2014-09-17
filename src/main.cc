@@ -15,7 +15,7 @@
  * to call display() from the thread in which the OpenGL 
  * context was created.
  */
-Uint32 display(Uint32 interval, void *param) {
+Uint32 tick(Uint32 interval, void *param) {
   SDL_Event event;
   event.type = SDL_USEREVENT;
   event.user.code = RUN_GRAPHICS_DISPLAY;
@@ -66,12 +66,12 @@ std::shared_ptr<SDL_Window> InitWorld() {
 
   // Create a new window with an OpenGL surface
   _window = SDL_CreateWindow("CI224 - Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
-  if (!window) {
+  if (!_window) {
     std::cout << "Failed to create SDL window: " << SDL_GetError() << std::endl;
     return nullptr;
   }
 
-  SDL_GLContext glContext = SDL_GL_CreateContext(window.get());
+  SDL_GLContext glContext = SDL_GL_CreateContext(_window);
   if (!glContext) {
     std::cout << "Failed to create OpenGL context: " << SDL_GetError() << std::endl;
     return nullptr;
@@ -99,8 +99,8 @@ int main(int argc, char ** argv) {
     SDL_Quit();
   }
 
-  // Call the function "display" every delay milliseconds
-  SDL_AddTimer(delay, display, NULL);
+  // Call the function "tick" every delay milliseconds
+  SDL_AddTimer(delay, tick, NULL);
 
   // Add the main event loop
   SDL_Event event;
