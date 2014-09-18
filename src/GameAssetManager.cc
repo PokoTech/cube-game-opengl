@@ -19,6 +19,10 @@ GameAssetManager::GameAssetManager(ApplicationMode mode) {
   program_token = CreateGLProgram(vertex_shader, fragment_shader);
 }
 
+GameAssetManager::~GameAssetManager() {
+  glDeleteProgram(program_token);
+}
+
 GameAssetManager::GameAssetManager(GameAssetManager const& the_manager) {
   // TODO: implement this
 }
