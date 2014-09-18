@@ -98,6 +98,8 @@ std::shared_ptr<SDL_Window> InitWorld() {
 
   // OpenGL settings
   glDisable(GL_CULL_FACE);
+  glEnable(GL_DEPTH_TEST);
+  glDepthFunc(GL_LESS);
 
   window.reset(_window, SDL_DestroyWindow);
   return window;
@@ -157,6 +159,7 @@ int main(int argc, char ** argv) {
       break;
     case SDL_USEREVENT:
       Draw(window, game_world);
+
       break;
     default:
       break;
