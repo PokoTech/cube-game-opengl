@@ -23,7 +23,13 @@ $ ./configure
 $ make
 ```
 
-This should create a binary that can be executed as follows:
+Alternatively, if you'd like to build the project in debug mode use:
+
+> $ make CXXFLAGS=-DDEBUG
+
+# Running #
+
+The build process should create a binary that can be executed as follows:
 
 > $ ./src/shaderexample
 
