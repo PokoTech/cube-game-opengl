@@ -14,7 +14,7 @@ On Fedora 20 or later you can install these using a single command (as root):
 
 # Building #
 
-After cloning the source code or extracting a distribted archive, change to the
+After cloning the source code or extracting a distributed archive, change to the
 directory where the source code is:
 
 ``` bash
