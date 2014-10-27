@@ -13,6 +13,11 @@
 #include "common.h"
 #include "GameAsset.h"
 
+/**
+ * GameAssetManager is a container for GameAssets.  It also provides utility
+ * functions to to create a simple OpenGL program that can be used to draw a
+ * simple GameAsset.
+ */
 class GameAssetManager {
  public:
   explicit GameAssetManager(ApplicationMode); // constructor
@@ -29,6 +34,7 @@ class GameAssetManager {
   // As this is private and we're writing to the GPU, we will use raw pointers.
   std::pair<GLchar *, GLint>  ReadShader(std::string &);
 
+  // The internal scene graph is a simple list.
   std::vector<std::shared_ptr<GameAsset>> draw_list;
   GLuint program_token;
 };
