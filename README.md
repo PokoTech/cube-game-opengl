@@ -8,7 +8,7 @@
 * [SDL2](https://www.libsdl.org/)
 * [GLM](http://glm.g-truc.net/)
 
-On Fedora 20 or later you can install these using a single command (as root):
+On Fedora 22 or later you can install these using a single command (as root):
 
 > $ yum install boost-* glew-devel SDL2_* glm-devel
 
