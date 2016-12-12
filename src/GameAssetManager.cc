@@ -8,8 +8,7 @@ GameAssetManager::GameAssetManager(ApplicationMode mode) {
   std::string vertex_shader("shaders/translate.vs");
   std::string fragment_shader("shaders/fragment.fs");
 
-  switch(mode) {
-  case ROTATE:
+  switch(mode) {  case ROTATE:
     vertex_shader = "shaders/rotate.vs";
     break;
   case SCALE:
@@ -66,6 +65,11 @@ void GameAssetManager::AddAsset(std::shared_ptr<GameAsset> the_asset) {
  * Draws each GameAsset in the scene graph.
  */
 void GameAssetManager::Draw() {
+	auto camera = std::make_shared<Camera>();
+	auto matrix = camera->getViewMatrix();
+	GLint view_token = glGetUniformLocation(program_token, "view_matrix");
+	glUniformMatrix4fv(view_token, 1, GL_FALSE, glm::value_ptr(matrix));
+
   for(auto ga: draw_list) {
     ga->Draw(program_token);
   }

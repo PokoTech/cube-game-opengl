@@ -1,4 +1,5 @@
 #define GLEW_STATIC // Easier debugging
+
 #include <GL/glew.h>
 #include <GL/gl.h>
 #include <SDL2/SDL.h>
@@ -35,7 +36,7 @@ struct SDLWindowDeleter {
 };
 
 void Draw(const std::shared_ptr<SDL_Window> window, const std::shared_ptr<GameWorld> game_world) {
-  glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
+  glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
   glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
   game_world->Draw();
