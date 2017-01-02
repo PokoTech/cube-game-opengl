@@ -16,7 +16,7 @@ class CubeAsset : public GameAsset {
   virtual void Draw(GLuint);
 
  private:
-  GLuint element_buffer_length;
+  GLuint vertex_buffer_length, element_buffer_length;
   GLuint vertex_buffer_token, element_buffer_token;
 };
 

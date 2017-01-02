@@ -5,6 +5,10 @@
 
 #include <GL/gl.h>
 
+#include <fstream>
+#include <iostream>
+#include <string>
+
 #include "common.h"
 #include "GameAssetManager.h"
 #include "CubeAsset.h"
@@ -23,6 +27,8 @@ class GameWorld {
    */
   GameWorld(ApplicationMode);
 
+  void CreateWorld();
+  void CheckToken(char token, uint x, uint y, uint z);
   /**
    * Calling Draw() will draw the entire world.
    */
