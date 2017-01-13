@@ -39,13 +39,19 @@ void GameWorld::CreateWorld(){
 void GameWorld::CheckToken(char token, uint x, uint y, uint z){
 	switch(token){
 		case '1': {
-								auto cube = std::make_shared<CubeAsset>();
-								cube->translate(x, y, z);
-								asset_manager->AddAsset(cube);
-								break;
-							}
-		case '2':
-			break;
+				auto cube = std::make_shared<CubeAsset>();
+				cube->translate(x, y, z);
+				cube->setColor(0.0, 1.0, 0.0);
+				asset_manager->AddAsset(cube);
+				break;
+			  }
+		case '2': {
+				auto cube = std::make_shared<CubeAsset>();
+				cube->translate(x, y, z);
+				cube->setColor(1.0, 0.0, 0.0);
+				asset_manager->AddAsset(cube);
+				break;
+			  }
 		default:
 			break;
 	}	
