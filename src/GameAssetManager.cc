@@ -4,7 +4,7 @@
  * Creates a GameAssetManager to load the correct shaders based on the
  * ApplicationMode.
  */
-GameAssetManager::GameAssetManager(ApplicationMode mode) {
+GameAssetManager::GameAssetManager(ApplicationMode mode) : camera (std::make_shared<Camera>()) {
   std::string vertex_shader("shaders/translate.vs");
   std::string fragment_shader("shaders/fragment.fs");
 
@@ -65,7 +65,7 @@ void GameAssetManager::AddAsset(std::shared_ptr<GameAsset> the_asset) {
  * Draws each GameAsset in the scene graph.
  */
 void GameAssetManager::Draw() {
-	auto camera = std::make_shared<Camera>();
+	
 	auto matrix = camera->getViewMatrix();
 	GLint view_token = glGetUniformLocation(program_token, "view_matrix");
 	glUniformMatrix4fv(view_token, 1, GL_FALSE, glm::value_ptr(matrix));

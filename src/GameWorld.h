@@ -28,6 +28,7 @@ class GameWorld {
   GameWorld(ApplicationMode);
 
   void CreateWorld();
+  void translateCamera();
   void CheckToken(char token, uint x, uint y, uint z);
   /**
    * Calling Draw() will draw the entire world.
