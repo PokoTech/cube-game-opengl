@@ -1,8 +1,12 @@
 #include "Camera.h"
 
-Camera::Camera() : speed(0.1f){
+Camera::Camera() : 
+        sensitivity(1.0f),
+        speed(0.1f){
 	camera_matrix = glm::mat4();
+                   
 }
+
 Camera::~Camera(){}
 
 
@@ -15,6 +19,7 @@ void Camera::Translate(float x, float y, float z){
 }
 
 void Camera::Rotate(float x,float y){
+        camera_matrix *=glm::rotate(glm::mat4(1.0f), sensitivity, glm::vec3(x,y, 0.0f));
 	
 }
 

@@ -21,6 +21,7 @@ class Camera{
 		void GoForwards();
 		void GoBackwards();
 		float speed;
+                float sensitivity;
  		
 };
 
