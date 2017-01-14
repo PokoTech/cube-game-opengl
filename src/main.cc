@@ -198,7 +198,22 @@ int main(int argc, char ** argv) {
 		break;
 	default:
 		break;
+
+	
     }
+    case SDL_MOUSEMOTION:
+		//mouse moving left
+	 if (event.motion.xrel < 0);
+                /* If the mouse is moving to the right */
+                else if (event.motion.xrel > 0);
+             
+                /* If the mouse is moving up */
+                else if (event.motion.yrel < 0);
+
+                /* If the mouse is moving down */
+                else if (event.motion.yrel > 0);
+
+            }
   }
 }
-}
+

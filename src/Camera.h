@@ -11,6 +11,7 @@ class Camera{
 		~Camera();
 		glm::mat4 getViewMatrix();
 		void Translate(float x, float y, float z);
+		void Rotate(float x, float y);
 	private:
 		glm::mat4 camera_matrix;
 		void GoUp();
