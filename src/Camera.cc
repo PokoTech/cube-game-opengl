@@ -14,6 +14,10 @@ void Camera::Translate(float x, float y, float z){
 	camera_matrix *= glm::translate(glm::mat4(1.0f), glm::vec3(x,y,z));
 }
 
+void Camera::Rotate(float x,float y){
+	
+}
+
 void Camera::GoForwards(){
 	camera_matrix *= glm::translate(glm::mat4(1.0f), glm::vec3(0.0f,0.0f,speed));
 }
