@@ -19,7 +19,7 @@ CubeAsset::CubeAsset(){
   GLuint element_buffer []  {
 		//front face
 		  2, 0, 1
-	  , 1, 3, 2
+	        , 1, 3, 2
 		//top face
 		, 0, 4, 5
 		, 5, 1, 0
@@ -92,7 +92,14 @@ void CubeAsset::Draw(GLuint program_token) {
     }
     exit(-1);
   }
+  
 
+  //sending color to the shader color_vector
+  GLuint color_attrib = glGetUniformLocation(program_token, "color_vector");
+  checkGLError();
+  glUniform3fv(color_attrib, 1, glm::value_ptr(color));
+
+  // sending matrix to the shader model_matrix
   GLuint model_attrib = glGetUniformLocation(program_token, "model_matrix");
   checkGLError();
   glUniformMatrix4fv(model_attrib, 1, GL_FALSE, glm::value_ptr(matrix));

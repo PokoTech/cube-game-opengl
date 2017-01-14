@@ -98,9 +98,9 @@ std::shared_ptr<SDL_Window> InitWorld() {
   }
 
   // OpenGL settings
-  glDisable(GL_CULL_FACE);
+  //glDisable(GL_CULL_FACE);
   glEnable(GL_DEPTH_TEST);
-  glDepthFunc(GL_LESS);
+  //glDepthFunc(GL_LESS);
 
   window.reset(_window, SDL_DestroyWindow);
   return window;
