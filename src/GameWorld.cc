@@ -2,6 +2,7 @@
 
 GameWorld::GameWorld (ApplicationMode mode) : asset_manager(std::make_shared<GameAssetManager>(mode)) {
 	CreateWorld();
+	//translateCamera();
 }
 
 void GameWorld::CreateWorld(){

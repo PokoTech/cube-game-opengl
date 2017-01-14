@@ -152,6 +152,7 @@ int main(int argc, char ** argv) {
   SDL_AddTimer(delay, tick, NULL);
 
   // Add the main event loop
+ // Add the main event loop
   SDL_Event event;
   while (SDL_WaitEvent(&event)) {
     switch (event.type) {
@@ -160,10 +161,44 @@ int main(int argc, char ** argv) {
       break;
     case SDL_USEREVENT:
       Draw(window, game_world);
-
       break;
+	 case SDL_KEYDOWN:
+      switch (event.key.keysym.sym) {
+      case SDLK_LEFT:
+      //game_world->
+      break;
+    case SDLK_RIGHT:
+      //game_world->
+      break;
+    case SDLK_UP:
+      //game_world->
+      break;
+    case SDLK_DOWN:
+      //game_world->
+      break;
+    case SDLK_SPACE:
+      //game_world->
+      break;
+    case SDLK_LSHIFT:
+      //game_world->
+      break;
+	}
     default:
       break;
+	
+    case SDL_KEYUP:
+ 	switch (event.key.keysym.sym) {	
+	case SDLK_LEFT:
+		break;
+	case SDLK_RIGHT:
+		break;
+	case SDLK_UP:
+		break;
+	case SDLK_DOWN:
+		break;
+	default:
+		break;
     }
   }
+}
 }
