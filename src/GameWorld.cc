@@ -7,7 +7,7 @@ GameWorld::GameWorld (ApplicationMode mode) : asset_manager(std::make_shared<Gam
 
 void GameWorld::CreateWorld(){
 	//read in from .level file // replace ApplicationMode with level == profit
-	std::ifstream world("levels/start.level");
+	std::ifstream world("levels/level1.level");
 	if(world.is_open()){
 
 		uint x = 0, y = 0, z = 0;
@@ -50,6 +50,13 @@ void GameWorld::CheckToken(char token, uint x, uint y, uint z){
 				auto cube = std::make_shared<CubeAsset>();
 				cube->translate(x, y, z);
 				cube->setColor(1.0, 0.0, 0.0);
+				asset_manager->AddAsset(cube);
+				break;
+			  }
+                case '3': {
+				auto cube = std::make_shared<CubeAsset>();
+				cube->translate(x, y, z);
+				cube->setColor(0.0, 0.0, 3.0);
 				asset_manager->AddAsset(cube);
 				break;
 			  }
