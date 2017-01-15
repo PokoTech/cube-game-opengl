@@ -30,6 +30,7 @@ class GameAssetManager {
   void operator=(GameAssetManager const&); // assignment
   void AddAsset(std::shared_ptr<GameAsset>);
   void Draw();
+  void UpdateCamera(Control_Key c, int x_rel, int y_rel);
 
  private:
   GLuint CreateGLProgram(std::string &, std::string &);

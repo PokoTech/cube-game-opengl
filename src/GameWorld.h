@@ -30,6 +30,7 @@ class GameWorld {
   void CreateWorld();
   void translateCamera();
   void CheckToken(char token, uint x, uint y, uint z);
+  void UpdateCamera(Control_Key c, int x_rel, int y_rel);
   /**
    * Calling Draw() will draw the entire world.
    */

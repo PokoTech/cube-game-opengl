@@ -16,7 +16,7 @@
 /*
  * SDL timers run in separate threads.  In the timer thread
  * push an event onto the event queue.  This event signifies
- * to call display() from the thread in which the OpenGL 
+ * to call display() from the thread in which the OpenGL
  * context was created.
  */
 Uint32 tick(Uint32 interval, void *param) {
@@ -150,70 +150,70 @@ int main(int argc, char ** argv) {
 
   // Call the function "tick" every delay milliseconds
   SDL_AddTimer(delay, tick, NULL);
+  SDL_SetRelativeMouseMode(SDL_TRUE);
 
   // Add the main event loop
  // Add the main event loop
   SDL_Event event;
+  Control_Key key = NO_KEY;
+  int mouse_x_rel = 0;
+  int mouse_y_rel = 0;
   while (SDL_WaitEvent(&event)) {
+    //mouse_x_rel = event.motion.xrel;
+    //mouse_y_rel = event.motion.yrel;
+    SDL_GetRelativeMouseState(&mouse_x_rel, &mouse_y_rel);
+
     switch (event.type) {
-    case SDL_QUIT:
-      SDL_Quit();
-      break;
-    case SDL_USEREVENT:
-      Draw(window, game_world);
-      break;
-	 case SDL_KEYDOWN:
-      switch (event.key.keysym.sym) {
-      case SDLK_LEFT:
-      //game_world->
-      break;
-    case SDLK_RIGHT:
-      //game_world->
-      break;
-    case SDLK_UP:
-      //game_world->
-      break;
-    case SDLK_DOWN:
-      //game_world->
-      break;
-    case SDLK_SPACE:
-      //game_world->
-      break;
-    case SDLK_LSHIFT:
-      //game_world->
-      break;
-	}
-    default:
-      break;
-	
-    case SDL_KEYUP:
- 	switch (event.key.keysym.sym) {	
-	case SDLK_LEFT:
-		break;
-	case SDLK_RIGHT:
-		break;
-	case SDLK_UP:
-		break;
-	case SDLK_DOWN:
-		break;
-	default:
-		break;
-
-	
+      case SDL_QUIT:
+        SDL_Quit();
+        break;
+      case SDL_USEREVENT:
+        Draw(window, game_world);
+        break;
+      case SDL_KEYDOWN:
+        switch (event.key.keysym.sym) {
+          case SDLK_LEFT:
+            key = MOVE_LEFT_D;
+            break;
+          case SDLK_RIGHT:
+            key = MOVE_RIGHT_D;
+            break;
+          case SDLK_UP:
+            key = MOVE_FORWARD_D;
+            break;
+          case SDLK_DOWN:
+            key = MOVE_BACKWARD_D;
+            break;
+          case SDLK_SPACE:
+            key = MOVE_UP_D;
+            break;
+          case SDLK_LSHIFT:
+            key = MOVE_DOWN_D;
+            break;
+          }
+          break;
+      case SDL_KEYUP:
+        switch (event.key.keysym.sym) {
+            case SDLK_LEFT:
+              key = MOVE_LEFT_U;
+              break;
+            case SDLK_RIGHT:
+              key = MOVE_RIGHT_U;
+              break;
+            case SDLK_UP:
+              key = MOVE_FORWARD_U;
+              break;
+            case SDLK_DOWN:
+              key = MOVE_BACKWARD_U;
+              break;
+            case SDLK_SPACE:
+              key = MOVE_UP_U;
+              break;
+            case SDLK_LSHIFT:
+              key = MOVE_DOWN_U;
+              break;
+        }break;
     }
-    case SDL_MOUSEMOTION:
-		//mouse moving left
-	 if (event.motion.xrel < 0);
-                /* If the mouse is moving to the right */
-                else if (event.motion.xrel > 0);
-             
-                /* If the mouse is moving up */
-                else if (event.motion.yrel < 0);
-
-                /* If the mouse is moving down */
-                else if (event.motion.yrel > 0);
-
-            }
+    game_world->UpdateCamera(key, mouse_x_rel, mouse_y_rel);
   }
 }
-

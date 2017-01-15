@@ -55,9 +55,14 @@ void GameWorld::CheckToken(char token, uint x, uint y, uint z){
 			  }
 		default:
 			break;
-	}	
+	}
 }
 
 void GameWorld::Draw() {
   asset_manager->Draw();
+}
+
+
+void GameWorld::UpdateCamera(Control_Key c, int x_rel, int y_rel){
+	asset_manager->UpdateCamera(c, x_rel, y_rel);
 }
