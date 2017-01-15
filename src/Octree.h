@@ -1,10 +1,10 @@
 class Octree{
   public:
-    Octree(GameAsset region, List<GameAsset> objList);
+    //Octree(GameAsset region, List<GameAsset> objList);
   private:
-    BuildTree();
-    AddNode();
+    void BuildTree();
+    void AddNode();
 
-    GameAsset oct_region;
-    List<GameAsset> objList;
+    //GameAsset oct_region;
+    //List<GameAsset> objList;
 };

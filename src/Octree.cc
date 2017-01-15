@@ -1,11 +1,9 @@
-Octree::Octree(){
+#include "Octree.h"
+
+void Octree::BuildTree(){
 
 }
 
-Octree::BuildTree(){
-
-}
-
-Octree::AddNode(){
+void Octree::AddNode(){
 
 }
