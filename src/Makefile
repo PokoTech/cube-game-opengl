@@ -107,7 +107,7 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_shaderexample_OBJECTS = main.$(OBJEXT) GameWorld.$(OBJEXT) \
 	GameAssetManager.$(OBJEXT) CubeAsset.$(OBJEXT) \
-	Camera.$(OBJEXT)
+	Camera.$(OBJEXT) Octree.$(OBJEXT)
 shaderexample_OBJECTS = $(am_shaderexample_OBJECTS)
 shaderexample_LDADD = $(LDADD)
 AM_V_lt = $(am__v_lt_$(V))
@@ -176,13 +176,13 @@ ETAGS = etags
 CTAGS = ctags
 am__DIST_COMMON = $(srcdir)/Makefile.in $(top_srcdir)/depcomp
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ACLOCAL = ${SHELL} /home/dominc/Documents/poop/cube-game-opengl/missing aclocal-1.15
+ACLOCAL = ${SHELL} /home/dominc/Documents/ddddddddddd/cube-game-opengl-master/missing aclocal-1.15
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 1
 AR = ar
-AUTOCONF = ${SHELL} /home/dominc/Documents/poop/cube-game-opengl/missing autoconf
-AUTOHEADER = ${SHELL} /home/dominc/Documents/poop/cube-game-opengl/missing autoheader
-AUTOMAKE = ${SHELL} /home/dominc/Documents/poop/cube-game-opengl/missing automake-1.15
+AUTOCONF = ${SHELL} /home/dominc/Documents/ddddddddddd/cube-game-opengl-master/missing autoconf
+AUTOHEADER = ${SHELL} /home/dominc/Documents/ddddddddddd/cube-game-opengl-master/missing autoheader
+AUTOMAKE = ${SHELL} /home/dominc/Documents/ddddddddddd/cube-game-opengl-master/missing automake-1.15
 AWK = mawk
 BOOST_CPPFLAGS = 
 BOOST_LDPATH = 
@@ -228,7 +228,7 @@ LIPO =
 LN_S = ln -s
 LTLIBOBJS = 
 LT_SYS_LIBRARY_PATH = 
-MAKEINFO = ${SHELL} /home/dominc/Documents/poop/cube-game-opengl/missing makeinfo
+MAKEINFO = ${SHELL} /home/dominc/Documents/ddddddddddd/cube-game-opengl-master/missing makeinfo
 MANIFEST_TOOL = :
 MKDIR_P = /bin/mkdir -p
 NM = /usr/bin/nm -B
@@ -254,10 +254,10 @@ SET_MAKE =
 SHELL = /bin/bash
 STRIP = strip
 VERSION = 0.1
-abs_builddir = /home/dominc/Documents/poop/cube-game-opengl/src
-abs_srcdir = /home/dominc/Documents/poop/cube-game-opengl/src
-abs_top_builddir = /home/dominc/Documents/poop/cube-game-opengl
-abs_top_srcdir = /home/dominc/Documents/poop/cube-game-opengl
+abs_builddir = /home/dominc/Documents/ddddddddddd/cube-game-opengl-master/src
+abs_srcdir = /home/dominc/Documents/ddddddddddd/cube-game-opengl-master/src
+abs_top_builddir = /home/dominc/Documents/ddddddddddd/cube-game-opengl-master
+abs_top_srcdir = /home/dominc/Documents/ddddddddddd/cube-game-opengl-master
 ac_ct_AR = ar
 ac_ct_CC = gcc
 ac_ct_CXX = g++
@@ -291,7 +291,7 @@ host_vendor = unknown
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/dominc/Documents/poop/cube-game-opengl/install-sh
+install_sh = ${SHELL} /home/dominc/Documents/ddddddddddd/cube-game-opengl-master/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -314,8 +314,8 @@ target_alias =
 top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
-EXTRA_DIST = GameWorld.h GameAssetManager.h GameAsset.h CubeAsset.h
-shaderexample_SOURCES = main.cc GameWorld.cc GameAssetManager.cc CubeAsset.cc Camera.cc
+EXTRA_DIST = GameWorld.h GameAssetManager.h GameAsset.h CubeAsset.h Octree.h
+shaderexample_SOURCES = main.cc GameWorld.cc GameAssetManager.cc CubeAsset.cc Camera.cc Octree.cc
 AM_CPPFLAGS = -DGL_GLEXT_PROTOTYPES -DGL3_PROTOTYPES -std=c++11 \
 	$(gl_CFLAGS) $(glew_CFLAGS) $(sdl2_CFLAGS) $(BOOST_CPPFLAGS)
 all: all-am
@@ -415,6 +415,7 @@ include ./$(DEPDIR)/Camera.Po
 include ./$(DEPDIR)/CubeAsset.Po
 include ./$(DEPDIR)/GameAssetManager.Po
 include ./$(DEPDIR)/GameWorld.Po
+include ./$(DEPDIR)/Octree.Po
 include ./$(DEPDIR)/main.Po
 
 .cc.o:

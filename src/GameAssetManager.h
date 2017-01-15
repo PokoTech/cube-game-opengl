@@ -30,6 +30,7 @@ class GameAssetManager {
   void operator=(GameAssetManager const&); // assignment
   void AddAsset(std::shared_ptr<GameAsset>);
   void Draw();
+  void UpdateCamera(Control_Key c, int x_rel, int y_rel);
 
  private:
   GLuint CreateGLProgram(std::string &, std::string &);
@@ -40,7 +41,7 @@ class GameAssetManager {
   // The internal scene graph is a simple list.
   std::vector<std::shared_ptr<GameAsset>> draw_list;
   GLuint program_token;
-
+  //created a shared camera object .
   std::shared_ptr<Camera> camera;
 };
 
