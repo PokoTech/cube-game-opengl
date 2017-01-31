@@ -1,22 +1,22 @@
 #include "Camera.h"
 
 //need to link this to a shader for the translations.
-Camera::Camera() : speed(30.0f), sensitivity(50.0f){
-	camera_matrix = glm::mat4();
+Camera::Camera() : speed(0.2f), sensitivity(0.02f){
+	camera_matrix = std::make_shared<glm::mat4>(glm::mat4());
 }
 Camera::~Camera(){}
 
 
-glm::mat4 Camera::getViewMatrix(){
+std::shared_ptr<glm::mat4> Camera::getViewMatrix(){
 	return camera_matrix;
 }
 
 void Camera::Translate(float x, float y, float z){
-	camera_matrix *= glm::translate(glm::mat4(1.0f), glm::vec3(x,y,z));
+	camera_matrix = std::make_shared<glm::mat4>((*camera_matrix) * glm::translate(glm::mat4(1.0f), 						      					   glm::vec3(x,y,z)));
 }
 
 void Camera::Rotate(float x,float y){
-	camera_matrix += glm::rotate(glm::mat4(1.0f), sensitivity, glm::vec3(y,x,0.0f));
+	camera_matrix = std::make_shared<glm::mat4>((*camera_matrix) * glm::rotate(glm::mat4(1.0f), 									sensitivity, glm::vec3(y,x,0.0f)));
 }
 
 void Camera::UpdateCamera(Control_Key key, int x_rel, int y_rel){
@@ -70,25 +70,25 @@ void Camera::UpdateCamera(Control_Key key, int x_rel, int y_rel){
 }
 
 void Camera::GoForwards(){
-	camera_matrix += glm::translate(glm::mat4(1.0f), glm::vec3(0.0f,0.0f,speed));
+	Translate(0,0,speed);
 }
 
 void Camera::GoBackwards(){
-	camera_matrix += glm::translate(glm::mat4(1.0f), glm::vec3(0.0f,0.0f,-speed));
+	Translate(0,0,-speed);
 }
 
 void Camera::GoLeft(){
-	camera_matrix += glm::translate(glm::mat4(1.0f), glm::vec3(-speed,0.0f,0.0f));
+	Translate(speed,0,0);
 }
 
 void Camera::GoRight(){
-	camera_matrix += glm::translate(glm::mat4(1.0f), glm::vec3(speed,0.0f,0.0f));
+	Translate(-speed,0,0);
 }
 
 void Camera::GoUp(){
-	camera_matrix += glm::translate(glm::mat4(1.0f), glm::vec3(0.0f,speed,0.0f));
+	Translate(0,speed,0);
 }
 
 void Camera::GoDown(){
-	camera_matrix += glm::translate(glm::mat4(1.0f), glm::vec3(0.0f,-speed,0.0f));
+	Translate(0,-speed,0);
 }

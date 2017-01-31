@@ -4,6 +4,7 @@
 #include <glm/mat4x4.hpp> // glm::mat4
 #include <glm/gtc/matrix_transform.hpp>
 #include <iostream>
+#include <memory>
 
 
 #include "common.h"
@@ -13,7 +14,7 @@ class Camera{
 	public:
 		Camera();
 		~Camera();
-		glm::mat4 getViewMatrix();
+		std::shared_ptr<glm::mat4> getViewMatrix();
 		void Translate(float x, float y, float z);
 		void Rotate(float x, float y);
 		void UpdateCamera(Control_Key key, int x_rel, int y_rel);
@@ -26,7 +27,7 @@ class Camera{
 		void GoForwards();
 		void GoBackwards();
 
-		glm::mat4 camera_matrix;
+		std::shared_ptr<glm::mat4> camera_matrix;
 		float speed;
 		float sensitivity;
 		//movement booleans
