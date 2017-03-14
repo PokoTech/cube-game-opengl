@@ -13,6 +13,9 @@ branches:
 notifications:
   email: true
 
+# before build script, run autoreconf
+before_script: autoreconf -i
+
 os:
 - linux
 - osx
