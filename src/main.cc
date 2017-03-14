@@ -37,7 +37,7 @@ struct SDLWindowDeleter {
 
 void Draw(const std::shared_ptr<SDL_Window> window, const std::shared_ptr<GameWorld> game_world) {
   glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
-  glClear(GL_COLOR_BUFFER_BIT);//|GL_DEPTH_BUFFER_BIT);
+  glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
   game_world->Draw();
 
@@ -99,7 +99,7 @@ std::shared_ptr<SDL_Window> InitWorld() {
 
   // OpenGL settings
   glDisable(GL_CULL_FACE);
-  //glEnable(GL_DEPTH_TEST);
+  glEnable(GL_DEPTH_TEST);
   //glDepthFunc(GL_LESS);
 
   window.reset(_window, SDL_DestroyWindow);

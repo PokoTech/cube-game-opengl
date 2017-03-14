@@ -63,7 +63,7 @@ mat4 scale(float x, float y, float z) {
 }
 
 void main() {
-      gl_Position = projection(radians(90.0), 4.0/3.0, 0.001, 100.0)
+      gl_Position = projection(radians(90.0), 4.0/3.0, 0.1, 1000.0)
                       * view_matrix
                       * model_matrix
                       * vec4(position, 1.0f);
