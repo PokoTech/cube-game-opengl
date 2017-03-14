@@ -34,3 +34,6 @@ class Camera{
 		bool m_forward = false, m_backward = false, m_left = false,
 		 		 m_right = false, m_up = false, m_down = false;
 };
+
+
+

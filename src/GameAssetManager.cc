@@ -65,6 +65,7 @@ void GameAssetManager::AddAsset(std::shared_ptr<GameAsset> the_asset) {
  * Draws each GameAsset in the scene graph.
  */
 void GameAssetManager::Draw() {
+
 	auto matrix = camera->getViewMatrix();
 	GLint view_token = glGetUniformLocation(program_token, "view_matrix");
 	glUniformMatrix4fv(view_token, 1, GL_FALSE, glm::value_ptr(*matrix));
@@ -167,7 +168,11 @@ std::pair<GLchar *, GLint> GameAssetManager::ReadShader(std::string & shader) {
   input_file.close();
   return std::make_pair(buffer, length);
 }
+<<<<<<< HEAD
 
+=======
+//load the Update camera function into GameAssetManager and applies Update Camera into camera.
+>>>>>>> 06d3e308af2400e8d2a0e502260b551afa6bebce
 void GameAssetManager::UpdateCamera(Control_Key c, int x_rel, int y_rel){
   camera->UpdateCamera(c, x_rel, y_rel);
 }

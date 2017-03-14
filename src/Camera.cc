@@ -92,3 +92,5 @@ void Camera::GoUp(){
 void Camera::GoDown(){
 	Translate(0,-speed,0);
 }
+
+

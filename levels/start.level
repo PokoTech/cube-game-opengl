@@ -1,3 +1,5 @@
+#specify height, width and length of world
+#different numbers represent different coloured cubes
 4 4 2
 # hash lines will be ignored
 # y = 0

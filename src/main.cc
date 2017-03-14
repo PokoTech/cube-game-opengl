@@ -139,7 +139,7 @@ ApplicationMode ParseOptions (int argc, char ** argv) {
 }
 
 int main(int argc, char ** argv) {
-  Uint32 delay = 1000/30; // in milliseconds
+  Uint32 delay = 1000/60; // in milliseconds
 
   auto mode = ParseOptions(argc, argv);
   auto window = InitWorld();
@@ -162,7 +162,8 @@ int main(int argc, char ** argv) {
     //mouse_x_rel = event.motion.xrel;
     //mouse_y_rel = event.motion.yrel;
     SDL_GetRelativeMouseState(&mouse_x_rel, &mouse_y_rel);
-
+	
+    // Initialised SDLK camera movement cases for KeyDown & keyUp events
     switch (event.type) {
       case SDL_QUIT:
         SDL_Quit();
@@ -214,6 +215,7 @@ int main(int argc, char ** argv) {
               break;
         }break;
     }
+    //initialise mouse movement events
     game_world->UpdateCamera(key, mouse_x_rel, mouse_y_rel);
   }
 }
