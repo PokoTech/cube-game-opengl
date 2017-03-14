@@ -37,7 +37,7 @@ struct SDLWindowDeleter {
 
 void Draw(const std::shared_ptr<SDL_Window> window, const std::shared_ptr<GameWorld> game_world) {
   glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
-  glClear(GL_COLOR_BUFFER_BIT);//|GL_DEPTH_BUFFER_BIT);
+  glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
   game_world->Draw();
 
@@ -99,7 +99,7 @@ std::shared_ptr<SDL_Window> InitWorld() {
 
   // OpenGL settings
   glDisable(GL_CULL_FACE);
-  //glEnable(GL_DEPTH_TEST);
+  glEnable(GL_DEPTH_TEST);
   //glDepthFunc(GL_LESS);
 
   window.reset(_window, SDL_DestroyWindow);
@@ -139,7 +139,7 @@ ApplicationMode ParseOptions (int argc, char ** argv) {
 }
 
 int main(int argc, char ** argv) {
-  Uint32 delay = 1000/30; // in milliseconds
+  Uint32 delay = 1000/60; // in milliseconds
 
   auto mode = ParseOptions(argc, argv);
   auto window = InitWorld();
@@ -162,7 +162,8 @@ int main(int argc, char ** argv) {
     //mouse_x_rel = event.motion.xrel;
     //mouse_y_rel = event.motion.yrel;
     SDL_GetRelativeMouseState(&mouse_x_rel, &mouse_y_rel);
-
+	
+    // Initialised SDLK camera movement cases for KeyDown & keyUp events
     switch (event.type) {
       case SDL_QUIT:
         SDL_Quit();
@@ -214,6 +215,7 @@ int main(int argc, char ** argv) {
               break;
         }break;
     }
+    //initialise mouse movement events
     game_world->UpdateCamera(key, mouse_x_rel, mouse_y_rel);
   }
 }

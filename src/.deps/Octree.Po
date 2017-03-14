@@ -1,5 +1,0 @@
-Octree.o: Octree.cc /usr/include/stdc-predef.h Octree.h
-
-/usr/include/stdc-predef.h:
-
-Octree.h:
