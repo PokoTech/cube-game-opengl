@@ -9,6 +9,7 @@ Camera::Camera() : speed(0.2f), sensitivity(0.02f){
 Camera::~Camera(){}
 
 
+
 std::shared_ptr<glm::mat4> Camera::getViewMatrix(){
 	auto camera_matrix = std::make_shared<glm::mat4>((*rotation_matrix) * (*transform_matrix));
 	return camera_matrix;
@@ -18,6 +19,7 @@ void Camera::Translate(float x, float y, float z){
 	transform_matrix = std::make_shared<glm::mat4>((*transform_matrix) * glm::translate(glm::mat4(1.0f), glm::vec3(x,y,z)));
 }
 
+//rotation_matrix has to be seperate from the transform matrix as glm always rotates around the origin.
 void Camera::Rotate(float x,float y){
 	rotation_matrix = std::make_shared<glm::mat4>((*rotation_matrix) * glm::rotate(glm::mat4(1.0f), sensitivity, glm::vec3(y,x,0.0f)));
 }
