@@ -3,16 +3,21 @@
 GameWorld::GameWorld (ApplicationMode mode) : asset_manager(std::make_shared<GameAssetManager>(mode)) {
 	//CreateWorld();
 	//translateCamera();
-	auto cube2 = std::make_shared<CubeAsset>();
-	cube2->translate(1.0, 1.0, 1.0);
-	asset_manager->AddAsset(cube2);
-
 	auto cube1 = std::make_shared<CubeAsset>();
  	cube1->translate(3.0, 1.0, 1.0);
  	asset_manager->AddAsset(cube1);
 
-	bool ka = CheckCollision(*cube1, *cube2);
+	auto shape = std::make_shared<CubeAsset>("objects/test.obj");
+	shape->translate(1.0, 1.0, 1.0);
+	asset_manager->AddAsset(shape);
+
+	auto fail = std::make_shared<CubeAsset>("objects/fail.obj");
+	fail->translate(-4.0, 1.0, 1.0);
+	asset_manager->AddAsset(fail);
+
+	bool ka = CheckCollision(*cube1, *cube1);
 	std::cout << ka << std::endl;
+
 }
 
 void GameWorld::CreateWorld(){
@@ -25,6 +30,7 @@ void GameWorld::CreateWorld(){
 
 		world >> x_lim >> y_lim >> z_lim;
 		char token;
+
 		while(!world.eof()){
 			world >> token;
 			if(token == '#'){
