@@ -27,13 +27,13 @@ class Camera{
 		void GoForwards();
 		void GoBackwards();
 
-		std::shared_ptr<glm::mat4> camera_matrix;
+		//std::shared_ptr<glm::mat4> camera_matrix;
+		std::shared_ptr<glm::mat4> rotation_matrix;
+		std::shared_ptr<glm::mat4> transform_matrix;
+
 		float speed;
 		float sensitivity;
 		//movement booleans
 		bool m_forward = false, m_backward = false, m_left = false,
 		 		 m_right = false, m_up = false, m_down = false;
 };
-
-
-

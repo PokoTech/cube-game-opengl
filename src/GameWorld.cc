@@ -1,13 +1,28 @@
 #include "GameWorld.h"
 
 GameWorld::GameWorld (ApplicationMode mode) : asset_manager(std::make_shared<GameAssetManager>(mode)) {
-	CreateWorld();
+	//CreateWorld();
 	//translateCamera();
+	auto cube1 = std::make_shared<CubeAsset>();
+ 	cube1->translate(3.0, 1.0, 1.0);
+ 	asset_manager->AddAsset(cube1);
+
+	auto shape = std::make_shared<CubeAsset>("objects/test.obj");
+	shape->translate(1.0, 1.0, 1.0);
+	asset_manager->AddAsset(shape);
+
+	auto fail = std::make_shared<CubeAsset>("objects/fail.obj");
+	fail->translate(-4.0, 1.0, 1.0);
+	asset_manager->AddAsset(fail);
+
+	bool ka = CheckCollision(*cube1, *cube1);
+	std::cout << ka << std::endl;
+
 }
 
 void GameWorld::CreateWorld(){
 	//read in from .level file // replace ApplicationMode with level == profit
-  	std::ifstream world("levels/level1.level");
+  std::ifstream world("levels/level1.level");
 	if(world.is_open()){
 		uint x = 0, y = 0, z = 0;
 		uint x_lim, y_lim, z_lim;
@@ -15,6 +30,7 @@ void GameWorld::CreateWorld(){
 
 		world >> x_lim >> y_lim >> z_lim;
 		char token;
+
 		while(!world.eof()){
 			world >> token;
 			if(token == '#'){
@@ -29,7 +45,7 @@ void GameWorld::CreateWorld(){
 				if(y >= y_lim){ break; }
 			}
 		}
-	  
+
 	}else{
 		std::cout << "Failed to open file" << std::endl;
 	}
@@ -55,6 +71,23 @@ void GameWorld::CheckToken(char token, uint x, uint y, uint z){
 		default:
 			break;
 	}
+}
+
+// Currently only works with one size of cube
+bool GameWorld::CheckCollision(GameAsset &a, GameAsset &b) {
+	//one size fits all cube
+	float size = 0.5;
+	//get coordinates of cubes
+	auto aCoord = a.getCoordinates();
+	auto bCoord = b.getCoordinates();
+
+	// checking collision with all axis
+	return ((aCoord[0] - size) <= (bCoord[0] + size) &&
+	        (aCoord[0] + size) >= (bCoord[0] - size) &&
+				  (aCoord[1] - size) <= (bCoord[1] + size) &&
+					(aCoord[1] + size) >= (bCoord[1] - size) &&
+			 	  (aCoord[2] - size) <= (bCoord[2] + size) &&
+					(aCoord[2] + size) >= (bCoord[2] - size));
 }
 
 void GameWorld::Draw() {
