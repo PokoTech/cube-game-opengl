@@ -3,20 +3,13 @@
 GameWorld::GameWorld (ApplicationMode mode) : asset_manager(std::make_shared<GameAssetManager>(mode)) {
 	//CreateWorld();
 	//translateCamera();
-	auto cube1 = std::make_shared<CubeAsset>();
- 	cube1->translate(3.0, 1.0, 1.0);
- 	asset_manager->AddAsset(cube1);
 
-	auto shape = std::make_shared<CubeAsset>("objects/test.obj");
-	shape->translate(1.0, 1.0, 1.0);
-	asset_manager->AddAsset(shape);
-
-	auto fail = std::make_shared<CubeAsset>("objects/fail.obj");
+	auto fail = std::make_shared<CubeAsset>("objects/cube.obj");
 	fail->translate(-4.0, 1.0, 1.0);
 	asset_manager->AddAsset(fail);
 
-	bool ka = CheckCollision(*cube1, *cube1);
-	std::cout << ka << std::endl;
+	//bool ka = CheckCollision(*cube1, *cube1);
+	//std::cout << ka << std::endl;
 
 }
 

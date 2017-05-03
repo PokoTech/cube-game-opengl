@@ -1,12 +1,15 @@
 #version 130
 
 in vec3 position;
+in vec3 normal;
 
 uniform mat4 view_matrix;
 uniform mat4 model_matrix;
 uniform vec3 color_vector;
 
 out vec3 frag_color;
+out vec3 frag_pos;
+out vec3 Normal;
 
 mat4 projection(
     float angle_of_view_y,
@@ -68,4 +71,6 @@ void main() {
                       * model_matrix
                       * vec4(position, 1.0f);
       frag_color = color_vector;
-}
+      frag_pos = vec3(model_matrix * vec4(position, 1.0f));
+      Normal = normal;
+  }
