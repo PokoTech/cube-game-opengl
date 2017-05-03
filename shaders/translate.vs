@@ -9,6 +9,7 @@ uniform vec3 color_vector;
 
 out vec3 frag_color;
 out vec3 frag_pos;
+out vec3 view_pos;
 out vec3 Normal;
 
 mat4 projection(
@@ -72,5 +73,6 @@ void main() {
                       * vec4(position, 1.0f);
       frag_color = color_vector;
       frag_pos = vec3(model_matrix * vec4(position, 1.0f));
+      view_pos = vec3(view_matrix[3][0], view_matrix[3][1], view_matrix[3][2] );
       Normal = normal;
   }

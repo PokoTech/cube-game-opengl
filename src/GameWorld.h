@@ -12,6 +12,7 @@
 #include "common.h"
 #include "GameAssetManager.h"
 #include "CubeAsset.h"
+#include "ModelLoader.h"
 
 /**
  * GameWorld allows us to separate the management of the game world from the
@@ -31,6 +32,7 @@ class GameWorld {
   void translateCamera();
   void CheckToken(char token, uint x, uint y, uint z);
   void UpdateCamera(Control_Key c, int x_rel, int y_rel);
+  bool CheckCollision(GameAsset &a, GameAsset &b);
   /**
    * Calling Draw() will draw the entire world.
    */

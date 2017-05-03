@@ -4,8 +4,18 @@ GameWorld::GameWorld (ApplicationMode mode) : asset_manager(std::make_shared<Gam
 	//CreateWorld();
 	//translateCamera();
 
+
+	auto light = std::make_shared<CubeAsset>();
+	light->translate(1, 1, 1.0);
+	light->setColor(1.0f,1.0f,1.0f);
+	asset_manager->AddAsset(light);
+
+	auto cube = std::make_shared<CubeAsset>();
+	cube->translate(0.0, 0.0, 0.0);
+	asset_manager->AddAsset(cube);
+
 	auto fail = std::make_shared<CubeAsset>("objects/cube.obj");
-	fail->translate(-4.0, 1.0, 1.0);
+	fail->translate(-4.0, 3.0, 0.0);
 	asset_manager->AddAsset(fail);
 
 	//bool ka = CheckCollision(*cube1, *cube1);

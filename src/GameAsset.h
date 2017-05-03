@@ -15,15 +15,19 @@ class GameAsset {
 	virtual void Draw(GLuint) = 0;
 	//places values in a mat4 matrix to be sent to the shader
 	void translate(float x, float y, float z){
-		matrix *= glm::translate(glm::mat4(1.0f), glm::vec3(x, y, z));
+		matrix = glm::translate(matrix, glm::vec3(x, y, z));
 	}
 	//places values in the vec3 color to be sent to the shader
 	void setColor(float r, float g, float b){
 		color = glm::vec3(r, g, b);
 	}
+
+  glm::vec3 getCoordinates(){
+    return glm::vec3(matrix[3][0],matrix[3][1],matrix[3][2]);
+  }
  protected:
 	glm::mat4 matrix = glm::mat4();
-	glm::vec3 color  = glm::vec3();
+	glm::vec3 color  = glm::vec3(1.0, 0.0, 1.0);
 
 };
 

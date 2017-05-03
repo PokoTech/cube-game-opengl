@@ -5,15 +5,15 @@ CubeAsset::CubeAsset(){
 	std::vector<GLfloat> vertex_buffer;
 	vertex_buffer.insert(vertex_buffer.end(),
 	{
-	    -0.5f, -0.5f, -0.5f
-	  , -0.5f,  0.5f, -0.5f
-	  ,  0.5f, -0.5f, -0.5f
-	  ,  0.5f,  0.5f, -0.5f,
+	    -0.5f, -0.5f, 0.5f
+	  , -0.5f,  0.5f, 0.5f
+	  ,  0.5f, -0.5f, 0.5f
+	  ,  0.5f,  0.5f, 0.5f,
 
-		  -0.5f, -0.5f, -1.5f
-		, -0.5f, 0.5f, -1.5f
-		,  0.5f, -0.5f, -1.5f
-		,  0.5f, 0.5f, -1.5f
+		  -0.5f, -0.5f, -0.5f
+		, -0.5f, 0.5f,  -0.5f
+		,  0.5f, -0.5f, -0.5f
+		,  0.5f, 0.5f,  -0.5f
 	});
 
   std::vector<GLuint> element_buffer;
@@ -22,39 +22,45 @@ CubeAsset::CubeAsset(){
 		//front face
 		  2, 0, 1
 	  , 1, 3, 2
-		//left face
-		 , 0, 4, 5
-		 , 5, 1, 0
-		//back face
-		 , 4, 6, 7
-		 , 7, 5, 4
-		//right face
-		 , 6, 2, 3
-		 , 3, 7, 6
-		// bottom face
-		 , 6, 4, 0
-		 , 0, 2, 6
-		//top face
-		 , 3, 1, 5
-		 , 5, 7, 3
+		// //left face
+		, 0, 4, 5
+		, 5, 1, 0
+		// // //back face
+		, 4, 6, 7
+		, 7, 5, 4
+		// // //right face
+		, 6, 2, 3
+	  , 3, 7, 6
+		// // // bottom face
+		, 6, 4, 0
+		, 0, 2, 6
+		// // //top face
+		, 3, 1, 5
+		, 5, 7, 3
 	});
 
-	//Very messy normal buffer
+	//normal buffer
 	std::vector<GLfloat> normal_buffer;
 	normal_buffer.insert(normal_buffer.end(),
 	{
 		// front face
-		  0.0f,  -1.0f, 0.0f,
+		0.0f, 0.0f, -1.0f,
+		0.0f, 0.0f, -1.0f,
 	  // left face
-		  -1.0f,  0.0f,  0.0f,
-		// back face
-		  0.0f,  1.0f, 0.0f,
-		// right face
-			1.0f,  0.0f,  0.0f,
-	  // bottom face
-		  0.0f,  0.0f,  -1.0f,
-		// top face
-		  0.0f,  0.0f,  1.0f,
+	  1.0f,  0.0f,  0.0f,
+		1.0f,  0.0f,  0.0f,
+		// // back face
+		0.0f,  0.0f, -1.0f,
+		0.0f,  0.0f, -1.0f,
+		// // // right face
+		1.0f,  0.0f,  0.0f,
+		1.0f,  0.0f,  0.0f,
+	  // // bottom face
+		0.0f,  -1.0f,  0.0f,
+		0.0f,  -1.0f,  0.0f,
+		// // top face
+		0.0f,  1.0f,  0.0f,
+	  0.0f,  1.0f,  0.0f
 	});
 
 
@@ -87,7 +93,6 @@ CubeAsset::CubeAsset(const char* path){
 	std::vector<GLfloat> vertex_buffer;
   std::vector<GLuint> element_buffer;
 	std::vector<GLfloat> normal_buffer;
-	std::vector<GLuint> normal_element_buffer;
 
 	//Load object in from model
 	ModelLoader::loadObject(path, vertex_buffer, element_buffer, normal_buffer);
