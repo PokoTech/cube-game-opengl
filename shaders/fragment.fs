@@ -8,7 +8,7 @@ out vec4 out_color;
 
 void main()
 {
-
+        // from https://learnopengl.com/#!Lighting/Basic-Lighting
         vec3 lightPos = vec3(0.0f, 0.0f, 0.0f);
         vec3 lightColor = vec3(1.0f, 1.0f, 1.0f);
         //Ambient

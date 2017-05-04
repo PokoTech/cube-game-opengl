@@ -1,7 +1,7 @@
 #include "GameWorld.h"
 
 GameWorld::GameWorld (ApplicationMode mode) : asset_manager(std::make_shared<GameAssetManager>(mode)){
-	//CreateWorld();
+	CreateWorld();
 	//std::cout << glm::to_string(asset_manager->GetCamera()->GetCoordinates()) << std::endl;
 
 }
@@ -46,19 +46,41 @@ void GameWorld::CheckToken(char token, uint x, uint y, uint z){
 		case '1': {
 				auto cube = std::make_shared<CubeAsset>();
 				cube->translate(x, y, z);
-				cube->setColor(0.0, 1.0, 0.0);
+				cube->setColor(0.4, 0.4, 0.4);
 				asset_manager->AddAsset(cube);
-				world.push_back(cube);
 				break;
 			  }
 		case '2': {
 				auto cube = std::make_shared<CubeAsset>();
 				cube->translate(x, y, z);
-				cube->setColor(1.0, 0.0, 0.0);
+				cube->setColor(0.2, 0.2, 0.2);
+				asset_manager->AddAsset(cube);
+				break;
+			  }
+    case 'T': {
+				auto cube = std::make_shared<CubeAsset>("objects/tower.obj");
+				cube->translate(x, y, z);
+				cube->setColor(0.5, 0.5, 0.5);
 				asset_manager->AddAsset(cube);
 				world.push_back(cube);
 				break;
 			  }
+    case 'S': {
+        auto cube = std::make_shared<CubeAsset>("objects/wall_north.obj");
+        cube->translate(x, y, z);
+        cube->setColor(0.65, 0.65, 0.65);
+        asset_manager->AddAsset(cube);
+        world.push_back(cube);
+        break;
+        }
+  case 'N': {
+      auto cube = std::make_shared<CubeAsset>("objects/wall_south.obj");
+      cube->translate(x, y, z);
+      cube->setColor(0.65, 0.65, 0.65);
+      asset_manager->AddAsset(cube);
+      world.push_back(cube);
+      break;
+      }
 		default:
 			break;
 	}
@@ -67,7 +89,7 @@ void GameWorld::CheckToken(char token, uint x, uint y, uint z){
 // Currently only works with one size of cube
 bool GameWorld::CheckCollision(GameAsset &a, GameAsset &b) {
 	//one size fits all cube
-	float size = 0.5;
+	float size = 0.45;
 	//get coordinates of cubes
 	auto aCoord = a.getCoordinates();
 	auto bCoord = b.getCoordinates();
@@ -88,7 +110,7 @@ bool GameWorld::CheckCollision(std::shared_ptr<GameAsset> &a, std::shared_ptr<Ga
 
 bool GameWorld::CheckCollision(glm::vec3 &a, glm::vec3 &b) {
 	//one size fits all cube
-	float size = 0.5;
+	float size = 0.45;
 	// checking collision with all axis
 	return ((a.x - size) <= (b.x + size) &&
 	        (a.x + size) >= (b.x - size) &&
@@ -108,20 +130,24 @@ void GameWorld::Update() {
 
 	// Spawn new baddies
 	if(game_timer % spawn_rate == 0){
-		auto baddie = std::make_shared<CubeAsset>();
+		auto baddie = std::make_shared<CubeAsset>("objects/baddie.obj");
 		int x = rand() % 30 + 10;
 		if(rand() % 2) x *= -1;
 		int z = rand() % 30 + 10;
 		if(rand() % 2) z *= -1;
 		baddie->translate(x, 1.0f, z);
-		baddie->setColor(0.0, 1.0, 0.0);
+
+    float r = (float)(rand() % 100 + 1) / 100;
+    float g = (float)(rand() % 100 + 1) / 100;
+    float b = (float)(rand() % 100 + 1) / 100;
+		baddie->setColor(r, g, b);
 		asset_manager->AddAsset(baddie);
 		baddies.push_back(baddie);
 	}
 
 	//reduce spawn_rate
-	if(game_timer % reduce_rate == 0 && spawn_rate >= 1){
-		spawn_rate -= 4;
+	if(game_timer % reduce_rate == 0 && spawn_rate >= 20){
+		spawn_rate -= 5;
 	}
 
 	// Every frame translate baddies toward player
@@ -174,7 +200,7 @@ void GameWorld::Draw() {
 void GameWorld::FireBullet(){
 	if(!firedBullet){
 		firedBullet = true;
-		auto bullet = std::make_shared<CubeAsset>();
+		auto bullet = std::make_shared<CubeAsset>("objects/bullet.obj");
 		auto camera_pos = asset_manager->GetCamera()->GetCoordinates();
 		auto camera_dir = asset_manager->GetCamera()->GetRotation();
 		bullet->translate(camera_pos);

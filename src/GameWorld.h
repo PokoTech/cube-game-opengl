@@ -9,7 +9,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <stdlib.h> 
+#include <stdlib.h>
 
 #include "common.h"
 #include "GameAssetManager.h"
@@ -54,14 +54,14 @@ class GameWorld {
 
   // badly placed game logic, please ignore.
 public:
-  int health = 3;
+  int health = 5;
   int score = 0;
   // Methods that shouldn't be in this class
   void FireBullet();
 private:
   long game_timer;
   bool firedBullet = false;
-  int spawn_rate = 50;
+  int spawn_rate = 100;
   int reduce_rate = 400;
 };
 #endif // GAMEWORLD_H

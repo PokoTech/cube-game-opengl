@@ -1,7 +1,7 @@
 #include "Camera.h"
 
 //need to link this to a shader for the translations.
-Camera::Camera(float x, float y, float z) : speed(0.01f), sensitivity(0.005f), fly(false){
+Camera::Camera(float x, float y, float z) : speed(0.002f), sensitivity(0.005f), fly(false){
 	transform_vector = glm::vec3(x, y, z);
 	rotation_vector = -glm::vec3(-45,0,0);
 	up_direction = glm::vec3(0, 1, 0);
