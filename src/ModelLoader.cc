@@ -1,5 +1,11 @@
 #include "ModelLoader.h"
 
+/*
+ * Loads in an .obj file in the right format and decomposes it into three arrays
+ * to be used by cubeAsset to draw triangles to screen.
+ * returns true if successfull
+ */
+
 bool ModelLoader::loadObject(const char* path,
                              std::vector<GLfloat> &out_vertex_buffer,
                              std::vector<GLuint>  &out_element_buffer,
@@ -23,11 +29,13 @@ bool ModelLoader::loadObject(const char* path,
           obj >> token;
           out_vertex_buffer.push_back(std::strtof(token.c_str(),0));
       }
+    //vn for vertex normals
     }else if (token == "vn"){
       for(int i = 0; i < 3; i++){
           obj >> token;
           temp_normals.push_back(std::strtof(token.c_str(),0));
       }
+    //f for faces
     }else if(token == "f"){
       std::size_t found;
       std::string normal_element;
@@ -57,5 +65,4 @@ bool ModelLoader::loadObject(const char* path,
   }
 
   return true;
-
 }

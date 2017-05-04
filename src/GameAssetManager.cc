@@ -176,10 +176,16 @@ std::pair<GLchar *, GLint> GameAssetManager::ReadShader(std::string & shader) {
   return std::make_pair(buffer, length);
 }
 
-//load the Update camera function into GameAssetManager and applies Update Camera into camera.
+/*
+ * Sends input messages to the camera. All processing is done in camera.
+ */
 void GameAssetManager::UpdateCamera(Control_Key c, int x_rel, int y_rel){
   camera->UpdateCamera(c, x_rel, y_rel);
 }
+
+/*
+ * returns a reference to the camera
+ */
 
 std::shared_ptr<Camera> GameAssetManager::GetCamera(){
   return camera;

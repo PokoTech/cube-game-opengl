@@ -13,7 +13,9 @@ BOOST_PYTHON_MODULE(libcube){
   def("hello", hello);
 }
 
-// 
+
+
+//
 // BOOST_PYTHON_MODULE(libcube)
 // {
 // 	class_<Main>("InitWorld")

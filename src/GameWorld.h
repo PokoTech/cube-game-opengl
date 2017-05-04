@@ -59,7 +59,7 @@ public:
   // Methods that shouldn't be in this class
   void FireBullet();
 private:
-  long game_timer;
+  long game_timer = 0;
   bool firedBullet = false;
   int spawn_rate = 100;
   int reduce_rate = 400;

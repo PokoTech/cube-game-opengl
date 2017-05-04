@@ -1,5 +1,9 @@
 #include "CubeAsset.h"
 
+/*
+ * Changed all arrays into vectors for easier access and addition.
+ */
+
 CubeAsset::CubeAsset(){
   // model coordinates, origin at centre.
 	std::vector<GLfloat> vertex_buffer;
@@ -39,7 +43,7 @@ CubeAsset::CubeAsset(){
 		, 5, 7, 3
 	});
 
-	//normal buffer
+	// A set of normals for each triangle, used for calculating light
 	std::vector<GLfloat> normal_buffer;
 	normal_buffer.insert(normal_buffer.end(),
 	{

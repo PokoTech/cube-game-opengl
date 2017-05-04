@@ -48,15 +48,15 @@ class GameAsset {
     return glm::vec3(matrix[3][0],matrix[3][1],matrix[3][2]);
   }
 
-  glm::vec3 getSize(){
-    return size;
-  }
+  // Unused , would have returned size of object if calculated by model loader
+  // glm::vec3 getSize(){
+  //   return size;
+  // }
  protected:
 	glm::mat4 matrix = glm::mat4();
 	glm::vec3 color  = glm::vec3(1.0, 0.0, 1.0);
   glm::vec3 size   = glm::vec3(0.5, 0.5, 0.5);
   glm::vec3 dir    = glm::vec3();
-
 
   float speed = 0.1;
 };

@@ -6,6 +6,11 @@ GameWorld::GameWorld (ApplicationMode mode) : asset_manager(std::make_shared<Gam
 
 }
 
+/*
+ * Creates world from a .level file stored seperate.
+ * Takes in headers before making the world
+ */
+
 void GameWorld::CreateWorld(){
 	//read in from .level file // replace ApplicationMode with level == profit
   std::ifstream world("levels/level1.level");
@@ -40,7 +45,11 @@ void GameWorld::CreateWorld(){
 	}
 	world.close();
 }
-//Loads cube assets into the game world and specifies location and colour in multiple cases for variation of cubes.
+
+/*
+ * Loads different assets into the game relative to what token is at each
+ * position. This loads all the world assets before the game starts.
+ */
 void GameWorld::CheckToken(char token, uint x, uint y, uint z){
 	switch(token){
 		case '1': {
@@ -86,7 +95,10 @@ void GameWorld::CheckToken(char token, uint x, uint y, uint z){
 	}
 }
 
-// Currently only works with one size of cube
+/*
+ * Checks collision bwteen two game assets and returns true if they are
+ * colliding. Used for Bullet - Enemy collision.
+ */
 bool GameWorld::CheckCollision(GameAsset &a, GameAsset &b) {
 	//one size fits all cube
 	float size = 0.45;
@@ -103,10 +115,16 @@ bool GameWorld::CheckCollision(GameAsset &a, GameAsset &b) {
 					(aCoord[2] + size) >= (bCoord[2] - size));
 }
 
+/*
+ * Same as above but takes in two shared pointer game assets
+ */
 bool GameWorld::CheckCollision(std::shared_ptr<GameAsset> &a, std::shared_ptr<GameAsset> &b){
 	return CheckCollision(*a, *b);
 }
 
+/*
+ * Same as above but used two vector 3
+ */
 
 bool GameWorld::CheckCollision(glm::vec3 &a, glm::vec3 &b) {
 	//one size fits all cube
@@ -122,7 +140,10 @@ bool GameWorld::CheckCollision(glm::vec3 &a, glm::vec3 &b) {
 
 
 
-//All Game logic is handled here
+/*
+ * Seperating game logic from draw calls. Update holds all game logic such as
+ * collision, score, health, movement of objects.
+ */
 void GameWorld::Update() {
 	//Update game objects
 	game_timer++;
@@ -196,7 +217,10 @@ void GameWorld::Draw() {
   asset_manager->Draw();
 }
 
-// Creates a bullet from the players perspective
+/*
+ * Creates bullet ontop of the camera and sets its movement direction to
+ * wherever the camera is facing
+ */
 void GameWorld::FireBullet(){
 	if(!firedBullet){
 		firedBullet = true;
@@ -212,7 +236,11 @@ void GameWorld::FireBullet(){
 }
 
 
-//load in the update camera into GameWorld
+/*
+ * Checks for mouseclicks to fire bullets. Sends key and mouse info down to the
+ * camera to be processed. Checks if the camera has collided with anything before
+ * it is drawn to screen, if so revert the cameras location.
+ */
 void GameWorld::UpdateCamera(Control_Key c, int x_rel, int y_rel){
 
 	//quick nasty way to get the player shooting

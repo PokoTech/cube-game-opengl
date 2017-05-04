@@ -5,30 +5,45 @@ Camera::Camera(float x, float y, float z) : speed(0.002f), sensitivity(0.005f), 
 	transform_vector = glm::vec3(x, y, z);
 	rotation_vector = -glm::vec3(-45,0,0);
 	up_direction = glm::vec3(0, 1, 0);
-	//camera_matrix = std::make_shared<glm::mat4>(glm::mat4());
 }
 Camera::~Camera(){}
 
 
-
+/*
+ * Uses rotation and translaton vector to create a mat4 which gets sent to the shader.
+ * Changed from multiplying 2 matrixes for clarity and faster performance on CPU
+ */
 std::shared_ptr<glm::mat4> Camera::getViewMatrix(){
 	auto cam = glm::lookAt(transform_vector, transform_vector + rotation_vector, up_direction);
 	auto camera_matrix = std::make_shared<glm::mat4>(cam);
-	//std::make_shared<glm::mat4>((*rotation_matrix) * (*transform_matrix));
 	return camera_matrix;
 }
 
+/*
+ * returns current position of camera
+ */
 glm::vec3 Camera::GetCoordinates(){
 	return transform_vector;
 }
 
+/*
+ * returns current rotation of camera
+ */
 glm::vec3 Camera::GetRotation(){
 	return rotation_vector;
 }
 
+/*
+ * Used for reverting to the last position when the camera hits a wall
+ * this stops the camera from going through the wall in most cases.
+ */
 void Camera::RevertToLast(){
 	transform_vector = undo_transform;
 }
+
+/*
+ * Translates camera by vector 3
+ */
 
 void Camera::Translate(glm::vec3 direction){
 	undo_transform = transform_vector;
@@ -44,6 +59,10 @@ void Camera::Rotate(float x,float y){
 		rotation_vector = glm::rotate(rotation_vector, sensitivity * -y , axis);
 	}
 }
+
+/*
+ * Contains all input checks for the camera using the SDL events from main.cc
+ */
 void Camera::UpdateCamera(Control_Key key, int x_rel, int y_rel){
   if(x_rel != 0 || y_rel != 0) Rotate(x_rel, y_rel);
 
@@ -103,6 +122,10 @@ void Camera::UpdateCamera(Control_Key key, int x_rel, int y_rel){
 		if(m_down) GoDown();
 }
 
+/*
+ * Various movement abstractions
+ */
+
 void Camera::GoForwards(){
 	Translate(rotation_vector);
 }
@@ -128,6 +151,10 @@ void Camera::GoDown(){
 	if(fly)
 		Translate(glm::vec3(0, -1, 0));
 }
+
+/*
+ * Press F to fly around the world.
+ */
 
 void Camera::ToggleFly(){
 	fly = !fly;
