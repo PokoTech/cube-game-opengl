@@ -3,6 +3,7 @@
 #include <glm/vec4.hpp> // glm::vec4
 #include <glm/mat4x4.hpp> // glm::mat4
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/rotate_vector.hpp>
 #include <iostream>
 #include <memory>
 
@@ -15,7 +16,7 @@ class Camera{
 		Camera();
 		~Camera();
 		std::shared_ptr<glm::mat4> getViewMatrix();
-		void Translate(float x, float y, float z);
+		void Translate(glm::vec3 direction);
 		void Rotate(float x, float y);
 		void UpdateCamera(Control_Key key, int x_rel, int y_rel);
 	private:
@@ -27,9 +28,9 @@ class Camera{
 		void GoForwards();
 		void GoBackwards();
 
-		//std::shared_ptr<glm::mat4> camera_matrix;
-		std::shared_ptr<glm::mat4> rotation_matrix;
-		std::shared_ptr<glm::mat4> transform_matrix;
+		glm::vec3 rotation_vector;
+		glm::vec3 transform_vector;
+		glm::vec3 up_direction;
 
 		float speed;
 		float sensitivity;

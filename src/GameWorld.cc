@@ -14,7 +14,7 @@ GameWorld::GameWorld (ApplicationMode mode) : asset_manager(std::make_shared<Gam
 	cube->translate(0.0, 0.0, 0.0);
 	asset_manager->AddAsset(cube);
 
-	auto fail = std::make_shared<CubeAsset>("objects/cube.obj");
+	auto fail = std::make_shared<CubeAsset>("objects/monster.obj");
 	fail->translate(-4.0, 3.0, 0.0);
 	asset_manager->AddAsset(fail);
 
@@ -27,12 +27,20 @@ void GameWorld::CreateWorld(){
 	//read in from .level file // replace ApplicationMode with level == profit
   std::ifstream world("levels/level1.level");
 	if(world.is_open()){
+
+
+		char token;
+		//get rid of preceeding comments
+		while(!world.eof()){
+			world >> token;
+			if(token == '#')
+				world.ignore(256, '\n');
+		}
 		uint x = 0, y = 0, z = 0;
 		uint x_lim, y_lim, z_lim;
 		//take in headers
 
 		world >> x_lim >> y_lim >> z_lim;
-		char token;
 
 		while(!world.eof()){
 			world >> token;

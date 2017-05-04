@@ -100,7 +100,7 @@ std::shared_ptr<SDL_Window> InitWorld() {
   // OpenGL settings
   glDisable(GL_CULL_FACE);
   glEnable(GL_DEPTH_TEST);
-  //glDepthFunc(GL_LESS);
+  glDepthFunc(GL_LESS);
 
   window.reset(_window, SDL_DestroyWindow);
   return window;
@@ -139,7 +139,7 @@ ApplicationMode ParseOptions (int argc, char ** argv) {
 }
 
 int main(int argc, char ** argv) {
-  Uint32 delay = 1000/60; // in milliseconds
+  Uint32 delay = 1000/45; // in milliseconds
 
   auto mode = ParseOptions(argc, argv);
   auto window = InitWorld();
@@ -150,6 +150,8 @@ int main(int argc, char ** argv) {
 
   // Call the function "tick" every delay milliseconds
   SDL_AddTimer(delay, tick, NULL);
+
+  SDL_ShowCursor(0);
   SDL_SetRelativeMouseMode(SDL_TRUE);
 
   // Add the main event loop
@@ -159,17 +161,15 @@ int main(int argc, char ** argv) {
   int mouse_x_rel = 0;
   int mouse_y_rel = 0;
   while (SDL_WaitEvent(&event)) {
-    //mouse_x_rel = event.motion.xrel;
-    //mouse_y_rel = event.motion.yrel;
-    SDL_GetRelativeMouseState(&mouse_x_rel, &mouse_y_rel);
-	
+    //SDL_GetRelativeMouseState(&mouse_x_rel, &mouse_y_rel);
     // Initialised SDLK camera movement cases for KeyDown & keyUp events
     switch (event.type) {
       case SDL_QUIT:
         SDL_Quit();
         break;
-      case SDL_USEREVENT:
-        Draw(window, game_world);
+      case SDL_MOUSEMOTION:
+        mouse_x_rel = event.motion.xrel;
+        mouse_y_rel = event.motion.yrel;
         break;
       case SDL_KEYDOWN:
         switch (event.key.keysym.sym) {
@@ -190,6 +190,9 @@ int main(int argc, char ** argv) {
             break;
           case SDLK_LSHIFT:
             key = MOVE_DOWN_D;
+            break;
+          case SDLK_ESCAPE:
+            SDL_Quit();
             break;
           }
           break;
@@ -213,9 +216,19 @@ int main(int argc, char ** argv) {
             case SDLK_LSHIFT:
               key = MOVE_DOWN_U;
               break;
-        }break;
+        }
+        break;
+        case SDL_USEREVENT:
+          if(key != NO_KEY || mouse_x_rel || mouse_y_rel){
+            game_world->UpdateCamera(key, mouse_x_rel, mouse_y_rel);
+            mouse_x_rel = 0;
+            mouse_y_rel = 0;
+          }
+          Draw(window, game_world);
+          mouse_x_rel = 0;
+          mouse_y_rel = 0;
+          break;
     }
     //initialise mouse movement events
-    game_world->UpdateCamera(key, mouse_x_rel, mouse_y_rel);
   }
 }

@@ -224,7 +224,7 @@ void CubeAsset::Draw(GLuint program_token) {
                  );
 
   checkGLError();
-  glDisableVertexAttribArray(position_attrib);
+  glDisableVertexAttribArray(position_attrib) ;
 	glDisableVertexAttribArray(normal_attrib);
 
 }
