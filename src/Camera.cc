@@ -1,8 +1,8 @@
 #include "Camera.h"
 
 //need to link this to a shader for the translations.
-Camera::Camera() : speed(0.01f), sensitivity(0.005f), fly(false){
-	transform_vector = glm::vec3(0, 0, 0);
+Camera::Camera(float x, float y, float z) : speed(0.01f), sensitivity(0.005f), fly(false){
+	transform_vector = glm::vec3(x, y, z);
 	rotation_vector = -glm::vec3(-45,0,0);
 	up_direction = glm::vec3(0, 1, 0);
 	//camera_matrix = std::make_shared<glm::mat4>(glm::mat4());
@@ -18,12 +18,20 @@ std::shared_ptr<glm::mat4> Camera::getViewMatrix(){
 	return camera_matrix;
 }
 
-
 glm::vec3 Camera::GetCoordinates(){
 	return transform_vector;
 }
 
+glm::vec3 Camera::GetRotation(){
+	return rotation_vector;
+}
+
+void Camera::RevertToLast(){
+	transform_vector = undo_transform;
+}
+
 void Camera::Translate(glm::vec3 direction){
+	undo_transform = transform_vector;
 	transform_vector += direction * speed;
 }
 

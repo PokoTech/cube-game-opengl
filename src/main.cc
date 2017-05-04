@@ -44,6 +44,15 @@ void Draw(const std::shared_ptr<SDL_Window> window, const std::shared_ptr<GameWo
 
   game_world->Update();
   game_world->Draw();
+  
+  // GAME OVER
+  if(game_world->health <= 0){
+    std::cout << "---- GAME -- OVER ----" <<std::endl;
+    std::cout << "|| FINAL ---- SCORE ||" <<std::endl;
+    std::cout << "||| ----- " << game_world->score << " ----- |||" <<std::endl;
+    std::cout << "-+-+-+-+-+-+-+-+-+-+-" <<std::endl;
+    SDL_Quit();
+  }
 
   // Don't forget to swap the buffers
   SDL_GL_SwapWindow(window.get());
@@ -174,6 +183,12 @@ int main(int argc, char ** argv) {
       case SDL_MOUSEMOTION:
         mouse_x_rel = event.motion.xrel;
         mouse_y_rel = event.motion.yrel;
+        break;
+      case SDL_MOUSEBUTTONDOWN:
+        key = MOUSE_D;
+        break;
+      case SDL_MOUSEBUTTONUP:
+        key = MOUSE_U;
         break;
       case SDL_KEYDOWN:
         switch (event.key.keysym.sym) {

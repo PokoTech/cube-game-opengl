@@ -4,7 +4,7 @@
  * Creates a GameAssetManager to load the correct shaders based on the
  * ApplicationMode.
  */
-GameAssetManager::GameAssetManager(ApplicationMode mode) : camera (std::make_shared<Camera>()) {
+GameAssetManager::GameAssetManager(ApplicationMode mode) : camera (std::make_shared<Camera>(2,1.2,2)) {
   std::string vertex_shader("shaders/translate.vs");
   std::string fragment_shader("shaders/fragment.fs");
 

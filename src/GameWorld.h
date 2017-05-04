@@ -7,7 +7,9 @@
 
 #include <fstream>
 #include <iostream>
+#include <vector>
 #include <string>
+#include <stdlib.h> 
 
 #include "common.h"
 #include "GameAssetManager.h"
@@ -33,6 +35,7 @@ class GameWorld {
   void CheckToken(char token, uint x, uint y, uint z);
   void UpdateCamera(Control_Key c, int x_rel, int y_rel);
   bool CheckCollision(GameAsset &a, GameAsset &b);
+  bool CheckCollision(std::shared_ptr<GameAsset> &a, std::shared_ptr<GameAsset> &b);
   bool CheckCollision(glm::vec3 &a, glm::vec3 &b);
 
   void Update();
@@ -48,5 +51,17 @@ class GameWorld {
   std::vector<std::shared_ptr<GameAsset>> baddies;
   std::vector<std::shared_ptr<GameAsset>> bullets;
 
+
+  // badly placed game logic, please ignore.
+public:
+  int health = 3;
+  int score = 0;
+  // Methods that shouldn't be in this class
+  void FireBullet();
+private:
+  long game_timer;
+  bool firedBullet = false;
+  int spawn_rate = 50;
+  int reduce_rate = 400;
 };
 #endif // GAMEWORLD_H

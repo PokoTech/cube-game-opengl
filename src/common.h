@@ -12,5 +12,5 @@
 enum ApplicationMode {TRANSFORM, ROTATE, SCALE};
 enum Control_Key {MOVE_FORWARD_D, MOVE_BACKWARD_D, MOVE_UP_D, MOVE_DOWN_D, MOVE_LEFT_D, MOVE_RIGHT_D,
                   MOVE_FORWARD_U, MOVE_BACKWARD_U, MOVE_UP_U, MOVE_DOWN_U, MOVE_LEFT_U, MOVE_RIGHT_U,
-                  F_KEY_D , NO_KEY};
+                  F_KEY_D , MOUSE_D, MOUSE_U, NO_KEY};
 #endif

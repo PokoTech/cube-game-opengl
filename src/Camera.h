@@ -13,13 +13,15 @@
 
 class Camera{
 	public:
-		Camera();
+		Camera(float x, float y, float z);
 		~Camera();
 		std::shared_ptr<glm::mat4> getViewMatrix();
 		void Translate(glm::vec3 direction);
 		void Rotate(float x, float y);
 		void UpdateCamera(Control_Key key, int x_rel, int y_rel);
+		void RevertToLast();
 		glm::vec3 GetCoordinates();
+		glm::vec3 GetRotation();
 	private:
 		//movement methods
 		void GoUp();
@@ -33,6 +35,8 @@ class Camera{
 		glm::vec3 rotation_vector;
 		glm::vec3 transform_vector;
 		glm::vec3 up_direction;
+
+		glm::vec3 undo_transform;
 
 		float speed;
 		float sensitivity;
