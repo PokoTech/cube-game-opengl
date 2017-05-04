@@ -11,8 +11,8 @@
 
 #include "common.h"
 #include "GameAssetManager.h"
+#include "GameAsset.h"
 #include "CubeAsset.h"
-#include "ModelLoader.h"
 
 /**
  * GameWorld allows us to separate the management of the game world from the
@@ -33,11 +33,20 @@ class GameWorld {
   void CheckToken(char token, uint x, uint y, uint z);
   void UpdateCamera(Control_Key c, int x_rel, int y_rel);
   bool CheckCollision(GameAsset &a, GameAsset &b);
+  bool CheckCollision(glm::vec3 &a, glm::vec3 &b);
+
+  void Update();
+
   /**
    * Calling Draw() will draw the entire world.
    */
   void Draw();
  private:
   std::shared_ptr<GameAssetManager> asset_manager;
+
+  std::vector<std::shared_ptr<GameAsset>> world;
+  std::vector<std::shared_ptr<GameAsset>> baddies;
+  std::vector<std::shared_ptr<GameAsset>> bullets;
+
 };
 #endif // GAMEWORLD_H

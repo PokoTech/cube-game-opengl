@@ -13,6 +13,8 @@
 #include "common.h"
 #include "GameWorld.h"
 
+
+
 /*
  * SDL timers run in separate threads.  In the timer thread
  * push an event onto the event queue.  This event signifies
@@ -33,12 +35,14 @@ struct SDLWindowDeleter {
   inline void operator()(SDL_Window* window) {
     SDL_DestroyWindow(window);
   }
+
 };
 
 void Draw(const std::shared_ptr<SDL_Window> window, const std::shared_ptr<GameWorld> game_world) {
   glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
   glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
+  game_world->Update();
   game_world->Draw();
 
   // Don't forget to swap the buffers
@@ -190,6 +194,9 @@ int main(int argc, char ** argv) {
             break;
           case SDLK_LSHIFT:
             key = MOVE_DOWN_D;
+            break;
+          case SDLK_f:
+            key = F_KEY_D;
             break;
           case SDLK_ESCAPE:
             SDL_Quit();

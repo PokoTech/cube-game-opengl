@@ -7,6 +7,7 @@
 #include <utility>
 #include <fstream>
 #include <iostream>
+#include <algorithm>
 
 #include <GL/gl.h>
 #include <glm/glm.hpp>
@@ -29,8 +30,12 @@ class GameAssetManager {
   GameAssetManager(GameAssetManager const&&); // move constructor
   void operator=(GameAssetManager const&); // assignment
   void AddAsset(std::shared_ptr<GameAsset>);
+  void RemoveAsset(std::shared_ptr<GameAsset>);
   void Draw();
+
+  // Camera functions
   void UpdateCamera(Control_Key c, int x_rel, int y_rel);
+  std::shared_ptr<Camera> GetCamera();
 
  private:
   GLuint CreateGLProgram(std::string &, std::string &);

@@ -62,6 +62,13 @@ void GameAssetManager::AddAsset(std::shared_ptr<GameAsset> the_asset) {
 }
 
 /**
+ * Removes the reference to an asset, thus deleting it.
+ */
+void GameAssetManager::RemoveAsset(std::shared_ptr<GameAsset> the_asset){
+  draw_list.erase(std::remove(draw_list.begin(), draw_list.end(), the_asset), draw_list.end());
+}
+
+/**
  * Draws each GameAsset in the scene graph.
  */
 void GameAssetManager::Draw() {
@@ -172,4 +179,8 @@ std::pair<GLchar *, GLint> GameAssetManager::ReadShader(std::string & shader) {
 //load the Update camera function into GameAssetManager and applies Update Camera into camera.
 void GameAssetManager::UpdateCamera(Control_Key c, int x_rel, int y_rel){
   camera->UpdateCamera(c, x_rel, y_rel);
+}
+
+std::shared_ptr<Camera> GameAssetManager::GetCamera(){
+  return camera;
 }

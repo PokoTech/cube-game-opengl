@@ -19,6 +19,7 @@ class Camera{
 		void Translate(glm::vec3 direction);
 		void Rotate(float x, float y);
 		void UpdateCamera(Control_Key key, int x_rel, int y_rel);
+		glm::vec3 GetCoordinates();
 	private:
 		//movement methods
 		void GoUp();
@@ -27,6 +28,7 @@ class Camera{
 		void GoRight();
 		void GoForwards();
 		void GoBackwards();
+		void ToggleFly();
 
 		glm::vec3 rotation_vector;
 		glm::vec3 transform_vector;
@@ -34,6 +36,8 @@ class Camera{
 
 		float speed;
 		float sensitivity;
+		bool fly;
+
 		//movement booleans
 		bool m_forward = false, m_backward = false, m_left = false,
 		 		 m_right = false, m_up = false, m_down = false;
