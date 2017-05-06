@@ -38,3 +38,16 @@ See
 > $ ./src/shaderexample --help
 
 for usage instructions.
+
+
+# Tutorial #
+
+-- Controls --
+- Arrow Keys: Move around the game world.
+- Mouse: Look around.
+- Mouse Button: Fire bullets.
+
+-- How to play --
+- Shoot baddies.
+- Get points.
+- Don't get hit by the baddies.
